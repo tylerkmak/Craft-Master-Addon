@@ -1,0 +1,6 @@
+## Interface: 11500
+## Title: CraftMaster
+## Author: Zeerti
+## Version: 1.0.0
+
+main.lua
