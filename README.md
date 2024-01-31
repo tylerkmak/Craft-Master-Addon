@@ -5,7 +5,7 @@ This is a number that is a 1:1 with the current build of wow. You can find this 
 ## Version
 We are using SemVer styling for the version. Ensure you update apropriately as you make changes. 
 
-# main.lua
+# Core.lua
 Add the files you want to import/run in this area. Currently we are only using main.lua. I'm uncertain as to how you can reference other files, but it's done here somehow.
 
 # Notes
@@ -20,6 +20,5 @@ At the time of writing the only way to get the trade skills is when the player h
 
 
 # Future Endeavors
-1. Convert output of ext to be converted into a list of item id's instead of item names
-2. Get approval to upload extension to curseforge or something like that
-3. Automate uploading process to hosting site for addons.
+1. Get approval to upload extension to curseforge or something like that
+2. Automate uploading process to hosting site for addons.
