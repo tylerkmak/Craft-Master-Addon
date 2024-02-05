@@ -1,14 +1,14 @@
-local version = "V1.1.0"
+local version = "V1.1.1"
 local warningShown = false
 local warningPopupFrame = nil
 
--- Create frame for edit box to sit in
+
 local craftableItemsFrame = CreateFrame("Frame", "CraftableItemsFrame", UIParent, "BasicFrameTemplateWithInset")
--- Frame settings
 local headerText = craftableItemsFrame:CreateFontString(nil, "OVERLAY", "GameFontNormalLarge")
+
 headerText:SetText("Craft Master " .. version)
 headerText:SetPoint("TOP", craftableItemsFrame, "TOP", 0, -8)
-craftableItemsFrame:SetSize(400, 600)  -- Adjusted size
+craftableItemsFrame:SetSize(400, 600)  
 craftableItemsFrame:SetPoint("CENTER")
 craftableItemsFrame:EnableMouse(true)
 craftableItemsFrame:SetMovable(true)
@@ -34,17 +34,16 @@ closeButton:SetScript("OnClick", function()
     craftableItemsFrame:Hide()
 end)
 
--- Create a scroll frame
+
 local scrollFrame = CreateFrame("ScrollFrame", "CraftableItemsScrollFrame", craftableItemsFrame, "UIPanelScrollFrameTemplate")
 scrollFrame:SetPoint("TOPLEFT", 10, -30)
-scrollFrame:SetPoint("BOTTOMRIGHT", -30, 40)  -- Adjusted bottom margin
+scrollFrame:SetPoint("BOTTOMRIGHT", -30, 40)  
 
--- Create an edit box for data display
+
 local editBox = CreateFrame("EditBox", "CraftableItemsEditBox", scrollFrame)
--- Edit box settings
 editBox:SetMultiLine(true)
 editBox:SetFontObject(GameFontNormal)
-editBox:SetWidth(480)  -- Adjusted width
+editBox:SetWidth(480)  
 editBox:SetAutoFocus(true)
 editBox:SetScript("OnEscapePressed", function()
     craftableItemsFrame:Hide()
@@ -54,7 +53,7 @@ scrollFrame:SetScrollChild(editBox)
 -- Scroll Bar to craftableItemsFrame
 local scrollBar = CreateFrame("Slider", nil, scrollFrame, "UIPanelScrollBarTemplate")
 scrollBar:SetPoint("TOPLEFT", craftableItemsFrame, "TOPRIGHT", -16, -30)
-scrollBar:SetPoint("BOTTOMRIGHT", craftableItemsFrame, "BOTTOMRIGHT", -8, 40)  -- Adjusted bottom margin
+scrollBar:SetPoint("BOTTOMRIGHT", craftableItemsFrame, "BOTTOMRIGHT", -8, 40) 
 scrollBar:SetMinMaxValues(1, 1)
 scrollBar:SetValueStep(1)
 scrollBar.scrollStep = 1
@@ -79,32 +78,31 @@ local function ShowWarningPopup(warningMessage, notFoundItems)
     if not warningShown then
         if not warningPopupFrame then
             warningPopupFrame = CreateFrame("Frame", "CraftMasterWarningPopup", UIParent)
-            warningPopupFrame:SetSize(380, 350)  -- Increased height to accommodate the additional text
+            warningPopupFrame:SetSize(380, 350)  
             warningPopupFrame:SetPoint("CENTER")
             warningPopupFrame:EnableMouse(true)
             warningPopupFrame:SetMovable(true)
             warningPopupFrame:SetResizable(true)
         
-            -- Create a background texture to set the background color
+            
             local backgroundTexture = warningPopupFrame:CreateTexture(nil, "BACKGROUND")
             backgroundTexture:SetAllPoints(true)
-            backgroundTexture:SetColorTexture(0, 0, 0, 0.9)  -- Almost black background color
+            backgroundTexture:SetColorTexture(0, 0, 0, 0.9)  
         
-            -- Add an edit box for displaying the warning message
+           
             local editBox = CreateFrame("EditBox", nil, warningPopupFrame)
             editBox:SetMultiLine(true)
-            editBox:SetFontObject(GameFontNormalLarge)  -- Bigger font for title
-            editBox:SetWidth(350)
+            editBox:SetFontObject(GameFontNormalLarge)  
             editBox:SetHeight(250)
-            editBox:SetPoint("TOPLEFT", 10, -40)  -- Adjusted position for title
+            editBox:SetPoint("TOPLEFT", 10, -40)  
             editBox:SetPoint("BOTTOMRIGHT", -10, 10)
             editBox:SetAutoFocus(false)
             editBox:SetScript("OnEscapePressed", function()
                 warningPopupFrame:Hide()
             end)
             editBox:SetScript("OnMouseDown", function() editBox:HighlightText() end)
-            editBox:EnableMouse(true)  -- Enable mouse interaction for editable box
-            editBox:SetTextColor(1, 0, 0)  -- Stark red text color for items not found
+            editBox:EnableMouse(true) 
+            editBox:SetTextColor(1, 0, 0)  
             editBox:SetText("Please report these items to the CraftMaster discord or via the /bugreport command on your server\n\n")
         
             warningPopupFrame.editBox = editBox
@@ -128,8 +126,6 @@ local function ShowWarningPopup(warningMessage, notFoundItems)
         warningPopupFrame.editBox:SetText(title .. "\n\n" .. "Please report these items to the CraftMaster discord or via the /bugreport command on your server\n\n" .. formattedNotFoundItems)
 
         warningPopupFrame:Show()
-
-        -- Set the flag to indicate the warning has been shown
         warningShown = true
     end
 end
@@ -137,7 +133,7 @@ end
 -- Function to replace item names with IDs in the output text
 local function ReplaceItemNamesWithIDs(outputText)
     local resultString = ""
-    local notFoundItems = {}  -- Track items not found in itemIDMapping
+    local notFoundItems = {}
 
     for item in outputText:gmatch("[^,]+") do
         local exactMatch = false
@@ -146,19 +142,16 @@ local function ReplaceItemNamesWithIDs(outputText)
         for itemName, itemID in pairs(itemIDMapping) do
             if item == itemName then
                 exactMatch = true
-                -- Append the itemID to the resultString
                 resultString = resultString .. itemID .. ","
                 break
             end
         end
 
-        -- If no exact match is found
         if not exactMatch then
             table.insert(notFoundItems, item)
         end
     end
 
-    -- Remove the trailing comma, if any
     resultString = resultString:gsub(",$", "")
 
     -- Display warning for not found items
@@ -175,16 +168,9 @@ end
 -- Function to list craftable items for current skill window open
 function ListCraftableItems()
     local numTradeSkills = GetNumTradeSkills()
-
-    -- This shouldn't ever happen after some changes, but leaving just in case
-    if numTradeSkills == 0 then
-        editBox:SetText("Please open a crafting window first and run this command.")
-        craftableItemsFrame:Show()
-        return
-    end
-
     local outputText = ""
     local name, type;
+
     for i = 1, numTradeSkills do
         name, type, _, _, _, _ = GetTradeSkillInfo(i)
         if (name and type ~= "header") then
@@ -199,13 +185,13 @@ function ListCraftableItems()
     editBox:HighlightText()
     UpdateScrollBar()
 
-    -- Dynamically set the frame size based on the content
     local contentHeight = editBox:GetHeight()
-    local contentWidth = editBox:GetWidth()  -- Get the width of the content
-    local frameHeight = math.max(contentHeight + 120, 300)  -- Set the minimum height to 300 pixels
-    local adjustedFrameHeight = math.min(frameHeight, 600)  -- Adjusted maximum height
+    local contentWidth = editBox:GetWidth()  
+    local frameHeight = math.max(contentHeight + 120, 300)  
+    local adjustedFrameHeight = math.min(frameHeight, 600)  
+
     craftableItemsFrame:SetHeight(adjustedFrameHeight)
-    craftableItemsFrame:SetWidth(contentWidth + 50)  -- Adjust the width to accommodate the content
+    craftableItemsFrame:SetWidth(contentWidth + 50)
     craftableItemsFrame:Show()
 end
 
