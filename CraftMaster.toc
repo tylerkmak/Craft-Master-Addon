@@ -3,4 +3,6 @@
 ## Author: Zeerti
 ## Version: 1.0.0
 
-main.lua
+embeds.xml
+
+Core.lua
