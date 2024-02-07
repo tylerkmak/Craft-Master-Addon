@@ -1242,7 +1242,35 @@ itemIDMapping = {
     ["Shredder Autosalvage Unit"] = "424641",
     ["Void-Touched Leather Gloves"] = "429354",
     ["Light Leather Quiver"] = "9060",
-    ["Small Leather Ammo Pouch"] = "9062"
+    ["Small Leather Ammo Pouch"] = "9062",
+    ["Insulating Gniodine"] = "213372",
+    ["Mildly Irradiated Rejuvenation Potion"] = "215162",
+    ["Low-Background Truesilver Plates"] = "213376",
+    ["Reflective Truesilver Braincage"] = "215167",
+    ["Tempered Interference-Negating Helmet"] = "215161",
+    ["Enchant Chest - Retricutioner"] = "435903",
+    ["Enchant Weapon - Dismantle"] = "435481",
+    ["Ez-Thro Radiation Bomb"] = "215168",
+    ["High-Yield Radiation Bomb"] = "215127",
+    ["Hyperconductive Goldwrap"] = "215115",
+    ["Polished Truesilver Gears"] = "213383",
+    ["Soul Vessel"] = "211427",
+    ["Whirling Truesilver Gearwall"] = "213390",
+    ["Faintly Glowing Leather"] = "213369",
+    ["Glowing Gneuro-Linked Cowl"] = "215166",
+    ["Glowing Hyperconductive Scale Coif"] = "215114",
+    ["Gneuro-Conductive Channeler's Hood"] = "215381",
+    ["Rad-Resistant Scale Hood"] = "215382",
+    ["Gneuro-Linked Arcano-Filament Monocle"] = "215111",
+    ["Hyperconductive Arcano-Filament"] = "213379"
+
+
+
+
+
+
+
+
 }
 
 
