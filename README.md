@@ -21,4 +21,9 @@ At the time of writing the only way to get the trade skills is when the player h
 
 # Future Endeavors
 1. Get approval to upload extension to curseforge or something like that
-2. Automate uploading process to hosting site for addons.
+2. Automate uploading process to hosting site for addon
+
+# Versions
+## 2.0.0 2/6/24
+- Added datamined profession data
+- Updated version of wow to 11501 from 11500
